@@ -13,7 +13,7 @@ public protocol CloudManageable {
     func request<T: Decodable>(with configuration: RequestConfiguration) async throws -> T
 }
 
-public final class CloudManager {
+public final class CloudManager: CloudManageable {
 
     // MARK: - Properties
 
