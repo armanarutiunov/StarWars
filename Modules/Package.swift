@@ -3,6 +3,8 @@
 
 import PackageDescription
 
+private let Utilities = Target.Dependency(stringLiteral: "Utilities")
+
 let package = Package(name: "Cloud",
 
                       platforms: [.iOS(.v16)],
@@ -10,5 +12,8 @@ let package = Package(name: "Cloud",
                       products: [.library(name: "Cloud", targets: ["Cloud"])],
 
                       targets: [.target(name: "Cloud",
+                                        dependencies: [Utilities]),
+
+                                .target(name: "Utilities",
                                         dependencies: [])]
 )
