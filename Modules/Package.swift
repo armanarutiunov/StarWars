@@ -11,13 +11,13 @@ let package = Package(name: "Cloud",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "StarWars",
-                                          targets: ["StarWars"])],
+                      products: [.library(name: "Filmography",
+                                          targets: ["Filmography"])],
 
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
 
-                                .target(name: "StarWars",
+                                .target(name: "Filmography",
                                         dependencies: [StarWarsManager]),
 
                                 .target(name: "StarWarsManager",

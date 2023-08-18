@@ -11,7 +11,7 @@
 		C206BCCE2A8FD567005CA013 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C206BCCD2A8FD567005CA013 /* SceneDelegate.swift */; };
 		C206BCD52A8FD568005CA013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C206BCD42A8FD568005CA013 /* Assets.xcassets */; };
 		C206BCD82A8FD568005CA013 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C206BCD62A8FD568005CA013 /* LaunchScreen.storyboard */; };
-		C206BCE22A8FE173005CA013 /* StarWars in Frameworks */ = {isa = PBXBuildFile; productRef = C206BCE12A8FE173005CA013 /* StarWars */; };
+		C206BCE42A8FE5A0005CA013 /* Filmography in Frameworks */ = {isa = PBXBuildFile; productRef = C206BCE32A8FE5A0005CA013 /* Filmography */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C206BCE22A8FE173005CA013 /* StarWars in Frameworks */,
+				C206BCE42A8FE5A0005CA013 /* Filmography in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			);
 			name = StarWars;
 			packageProductDependencies = (
-				C206BCE12A8FE173005CA013 /* StarWars */,
+				C206BCE32A8FE5A0005CA013 /* Filmography */,
 			);
 			productName = StarWars;
 			productReference = C206BCC82A8FD567005CA013 /* StarWars.app */;
@@ -359,9 +359,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C206BCE12A8FE173005CA013 /* StarWars */ = {
+		C206BCE32A8FE5A0005CA013 /* Filmography */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = StarWars;
+			productName = Filmography;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
