@@ -7,7 +7,7 @@ private let Cloud = Target.Dependency(stringLiteral: "Cloud")
 private let StarWarsManager = Target.Dependency(stringLiteral: "StarWarsManager")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
-let package = Package(name: "Cloud",
+let package = Package(name: "Modules",
 
                       platforms: [.iOS(.v16)],
 
