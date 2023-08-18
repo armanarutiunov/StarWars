@@ -20,6 +20,7 @@
 		C206BCD42A8FD568005CA013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C206BCD72A8FD568005CA013 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C206BCD92A8FD568005CA013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C206BCDF2A8FD67E005CA013 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +38,7 @@
 			isa = PBXGroup;
 			children = (
 				C206BCCA2A8FD567005CA013 /* StarWars */,
+				C206BCDF2A8FD67E005CA013 /* Modules */,
 				C206BCC92A8FD567005CA013 /* Products */,
 			);
 			sourceTree = "<group>";
