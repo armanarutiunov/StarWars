@@ -3,15 +3,12 @@
 
 import PackageDescription
 
-let package = Package(name: "Modules",
+let package = Package(name: "Cloud",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "Modules", targets: ["Modules"])],
+                      products: [.library(name: "Cloud", targets: ["Cloud"])],
 
-                      targets: [.target(name: "Modules",
-                                        dependencies: []),
-
-                                .testTarget(name: "ModulesTests",
-                                            dependencies: ["Modules"])]
+                      targets: [.target(name: "Cloud",
+                                        dependencies: [])]
 )
