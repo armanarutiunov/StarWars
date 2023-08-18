@@ -3,6 +3,7 @@
 
 import PackageDescription
 
+private let Cloud = Target.Dependency(stringLiteral: "Cloud")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
 let package = Package(name: "Cloud",
@@ -13,6 +14,9 @@ let package = Package(name: "Cloud",
 
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
+
+                                .target(name: "StarWarsManager",
+                                        dependencies: [Cloud]),
 
                                 .target(name: "Utilities",
                                         dependencies: [])]
