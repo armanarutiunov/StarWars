@@ -4,16 +4,21 @@
 import PackageDescription
 
 private let Cloud = Target.Dependency(stringLiteral: "Cloud")
+private let StarWarsManager = Target.Dependency(stringLiteral: "StarWarsManager")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
 let package = Package(name: "Cloud",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "Cloud", targets: ["Cloud"])],
+                      products: [.library(name: "StarWars",
+                                          targets: ["StarWars"])],
 
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
+
+                                .target(name: "StarWars",
+                                        dependencies: [StarWarsManager]),
 
                                 .target(name: "StarWarsManager",
                                         dependencies: [Cloud]),

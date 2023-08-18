@@ -11,6 +11,7 @@
 		C206BCCE2A8FD567005CA013 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C206BCCD2A8FD567005CA013 /* SceneDelegate.swift */; };
 		C206BCD52A8FD568005CA013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C206BCD42A8FD568005CA013 /* Assets.xcassets */; };
 		C206BCD82A8FD568005CA013 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C206BCD62A8FD568005CA013 /* LaunchScreen.storyboard */; };
+		C206BCE22A8FE173005CA013 /* StarWars in Frameworks */ = {isa = PBXBuildFile; productRef = C206BCE12A8FE173005CA013 /* StarWars */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C206BCE22A8FE173005CA013 /* StarWars in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +42,7 @@
 				C206BCCA2A8FD567005CA013 /* StarWars */,
 				C206BCDF2A8FD67E005CA013 /* Modules */,
 				C206BCC92A8FD567005CA013 /* Products */,
+				C206BCE02A8FE173005CA013 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +66,13 @@
 			path = StarWars;
 			sourceTree = "<group>";
 		};
+		C206BCE02A8FE173005CA013 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -79,6 +89,9 @@
 			dependencies = (
 			);
 			name = StarWars;
+			packageProductDependencies = (
+				C206BCE12A8FE173005CA013 /* StarWars */,
+			);
 			productName = StarWars;
 			productReference = C206BCC82A8FD567005CA013 /* StarWars.app */;
 			productType = "com.apple.product-type.application";
@@ -344,6 +357,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C206BCE12A8FE173005CA013 /* StarWars */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StarWars;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C206BCC02A8FD567005CA013 /* Project object */;
 }
