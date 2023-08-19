@@ -36,6 +36,15 @@ public final class FilmographySplitViewController: UISplitViewController {
             UINavigationController(rootViewController: characterDetailsViewController)
         ]
 
+        delegate = self
         preferredDisplayMode = .twoBesideSecondary
+    }
+}
+
+// MARK: - UISplitViewControllerDelegate
+extension FilmographySplitViewController: UISplitViewControllerDelegate {
+
+    public func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
+        .primary
     }
 }
