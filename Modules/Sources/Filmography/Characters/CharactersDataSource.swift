@@ -24,6 +24,8 @@ final class CharactersDataSource {
 
     private var characters = [Character]()
 
+    private var deferredCharacterFilter = [String]()
+
     // MARK: - Life Cycle
 
     init(manager: FilmographyManageable? = nil,
@@ -43,13 +45,21 @@ final class CharactersDataSource {
         do {
             self.characters = try await manager.fetchCharacters()
             configureDataSnapshot(with: characters)
+            if !deferredCharacterFilter.isEmpty {
+                filterCharacters(with: deferredCharacterFilter)
+            }
         } catch {
             throw error
         }
     }
 
     func filterCharacters(with ids: [String]) {
-        let characters = self.characters.filter { ids.contains($0.id) }
+        guard !characters.isEmpty else {
+            deferredCharacterFilter = ids
+            return
+        }
+
+        let characters = characters.filter { ids.contains($0.id) }
         configureDataSnapshot(with: characters)
     }
 
