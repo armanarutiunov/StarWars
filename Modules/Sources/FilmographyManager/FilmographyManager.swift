@@ -6,6 +6,8 @@
 //
 
 import Cloud
+import Foundation
+import Utilities
 
 public protocol FilmographyManageable {
     func fetchFilms() async throws -> [Film]
@@ -40,23 +42,30 @@ public final class FilmographyManager: FilmographyManageable {
                                                  endpoint: SWAPIEndpoint.films,
                                                  httpHeaders: SWAPIHeader.allHeaders)
         let response: FilmsResponse = try await cloudManager.request(with: configuration)
-        print("✨ Fetched Films")
         return response.films
     }
 
     @MainActor
     public func fetchCharacters() async throws -> [Character] {
-        var currentPage: Int? = 1
-        var characters = [Character]()
+        try await withThrowingTaskGroup(of: CharactersPage.self) { taskGroup in
+            for page in 1..<10 {
+                taskGroup.addTask { [weak self] in
+                    guard let self else {
+                        throw NSError.unknown
+                    }
 
-        while currentPage != nil {
-            let page = try await fetchCharactersPage(at: currentPage ?? 0)
-            print("✨ Fetched Characters on page \(currentPage!)")
-            currentPage = page.nextPage
-            characters.append(contentsOf: page.characters)
+                    return try await self.fetchCharactersPage(at: page)
+                }
+            }
+
+            var characters = [Character]()
+
+            for try await page in taskGroup {
+                characters.append(contentsOf: page.characters)
+            }
+
+            return characters.sorted()
         }
-
-        return characters
     }
 
     private func fetchCharactersPage(at page: Int) async throws -> CharactersPage {

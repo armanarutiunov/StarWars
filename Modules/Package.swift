@@ -25,7 +25,7 @@ let package = Package(name: "Modules",
                                         dependencies: [DesignSystem, FilmographyManager]),
 
                                 .target(name: "FilmographyManager",
-                                        dependencies: [Cloud]),
+                                        dependencies: [Cloud, Utilities]),
 
                                 .target(name: "Utilities",
                                         dependencies: [])]

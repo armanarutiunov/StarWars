@@ -60,7 +60,9 @@ final class CharactersDataSource {
             return
         }
 
-        let characters = characters.filter { ids.contains($0.id) }
+        let characters = characters
+            .filter { ids.contains($0.id) }
+            .sorted()
         configureDataSnapshot(with: characters)
     }
 

@@ -85,3 +85,11 @@ extension Character: Hashable {
         hasher.combine(gender)
     }
 }
+
+// MARK: - Comparable
+extension Character: Comparable {
+
+    public static func < (lhs: Character, rhs: Character) -> Bool {
+        lhs.name < rhs.name
+    }
+}
