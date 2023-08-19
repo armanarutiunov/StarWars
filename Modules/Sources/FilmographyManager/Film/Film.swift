@@ -12,14 +12,14 @@ public struct Film: Identifiable, Decodable {
     // MARK: - Declarations
 
     enum CodingKeys: String, CodingKey {
-        case id = "episode_id"
         case title
         case characterURLs = "characters"
+        case url = "url"
     }
 
     // MARK: - Properties
 
-    public let id: Int
+    public let id: String
 
     public let title: String
 
@@ -27,7 +27,7 @@ public struct Film: Identifiable, Decodable {
 
     // MARK: - Life Cycle
 
-    init(id: Int, title: String, characterIDs: [String]) {
+    init(id: String, title: String, characterIDs: [String]) {
         self.id = id
         self.title = title
         self.characterIDs = characterIDs
@@ -35,7 +35,7 @@ public struct Film: Identifiable, Decodable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int.self, forKey: .id)
+        self.id = try container.decode(URL.self, forKey: .url).lastPathComponent
         self.title = try container.decode(String.self, forKey: .title)
         characterIDs = try container.decode([URL].self, forKey: .characterURLs)
             .map {
