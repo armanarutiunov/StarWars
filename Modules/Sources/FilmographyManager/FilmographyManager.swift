@@ -9,6 +9,7 @@ import Cloud
 
 public protocol FilmographyManageable {
     func fetchFilms() async throws -> [Film]
+    func fetchCharacters() async throws -> [Character]
 }
 
 public final class FilmographyManager: FilmographyManageable {
@@ -42,6 +43,7 @@ public final class FilmographyManager: FilmographyManageable {
         return response.films
     }
 
+    @MainActor
     public func fetchCharacters() async throws -> [Character] {
         var index: Int?
         var characters = [Character]()
