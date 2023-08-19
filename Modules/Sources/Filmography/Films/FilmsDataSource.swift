@@ -8,7 +8,7 @@
 import FilmographyManager
 import UIKit
 
-struct FilmsDataSource {
+final class FilmsDataSource {
 
     // MARK: - Declarations
 
