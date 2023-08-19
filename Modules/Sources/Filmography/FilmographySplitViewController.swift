@@ -13,13 +13,16 @@ public final class FilmographySplitViewController: UISplitViewController {
 
     private let filmsViewController = FilmsViewController()
 
+    private let charactersViewController = CharactersViewController()
+
     // MARK: - Life Cycle
 
     public init() {
         super.init(style: .tripleColumn)
 
         viewControllers = [
-            filmsViewController
+            filmsViewController,
+            charactersViewController
         ]
     }
 
