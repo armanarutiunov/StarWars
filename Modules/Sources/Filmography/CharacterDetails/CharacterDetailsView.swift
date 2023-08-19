@@ -10,12 +10,6 @@ import UIKit
 
 final class CharacterDetailsView: UIView {
 
-    // MARK: - Declaration
-
-    private enum Constant {
-        static let placeholderText = "⬅️ Select any character"
-    }
-
     // MARK: - Properties
 
     lazy var collectionView: UICollectionView = {
@@ -36,38 +30,4 @@ final class CharacterDetailsView: UIView {
     }()
 
     private let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .plain))
-
-    private let placeholderLabel: UILabel = {
-        let label = UILabel()
-        label.isHidden = true
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.text = Constant.placeholderText
-        return label
-    }()
-
-    // MARK: - Life Cycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        addSubviewsAndConstraints()
-    }
-
-    private func addSubviewsAndConstraints() {
-        addSubview(placeholderLabel)
-
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            placeholderLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            placeholderLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-    }
-
-    // MARK: - Actions
-
-    func update(with viewModel: CharacterDetailsViewModel) {
-        placeholderLabel.isHidden = viewModel.isPlaceholderLabelHidden
-        collectionView.isHidden = viewModel.isCollectionViewHidden
-    }
 }

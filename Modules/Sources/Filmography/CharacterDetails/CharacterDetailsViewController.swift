@@ -34,14 +34,12 @@ final class CharacterDetailsViewController: UIViewController {
 
         dataSource = CharacterDetailsDataSource(collectionView: characterDetailsView.collectionView,
                                                 cellRegistration: characterDetailsView.cellRegistration)
-        characterDetailsView.update(with: .init(isCharacterDataSet: false))
     }
 
     // MARK: - Actions
 
     func update(with character: Character) {
         title = character.name
-        characterDetailsView.update(with: .init(isCharacterDataSet: true))
         dataSource.updateData(with: character)
     }
 }
