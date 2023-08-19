@@ -12,16 +12,16 @@ public enum SWAPIEndpoint: Endpoint {
     case people
 
     public var baseURL: URL {
-        URL(string: "https://swapi.dev/api")!
+        URL(string: "https://swapi.dev/")!
     }
 
     public var path: String {
         switch self {
         case .films:
-            return "/films"
+            return "/api/films"
 
         case .people:
-            return "/people"
+            return "/api/people"
         }
     }
 }
