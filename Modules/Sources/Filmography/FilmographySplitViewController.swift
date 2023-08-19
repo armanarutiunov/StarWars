@@ -21,15 +21,19 @@ public final class FilmographySplitViewController: UISplitViewController {
 
     public init() {
         super.init(style: .tripleColumn)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    public override func viewDidLoad() {
+        super.viewDidLoad()
 
         viewControllers = [
             UINavigationController(rootViewController: filmsViewController),
             UINavigationController(rootViewController: charactersViewController),
             UINavigationController(rootViewController: characterDetailsViewController)
         ]
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
