@@ -35,5 +35,7 @@ public final class FilmographySplitViewController: UISplitViewController {
             UINavigationController(rootViewController: charactersViewController),
             UINavigationController(rootViewController: characterDetailsViewController)
         ]
+
+        preferredDisplayMode = .twoBesideSecondary
     }
 }
