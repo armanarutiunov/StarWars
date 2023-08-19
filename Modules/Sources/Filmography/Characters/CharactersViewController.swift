@@ -69,6 +69,10 @@ final class CharactersViewController: UIViewController {
             }
         }
     }
+
+    func updateToCharacters(from film: Film) {
+        dataSource.filterCharacters(with: film.characterIDs)
+    }
 }
 
 // MARK: - UICollectionViewDelegate

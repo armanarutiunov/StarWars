@@ -102,6 +102,7 @@ extension FilmographySplitViewController: FilmsViewControllerDelegate {
     }
 
     func filmsViewControllerDidSelectFilm(_ film: Film) {
+        charactersViewController.updateToCharacters(from: film)
     }
 }
 
@@ -113,6 +114,7 @@ extension FilmographySplitViewController: CharactersViewControllerDelegate {
     }
 
     func charactersViewControllerDidSelectCharacter(_ character: Character) {
+        characterDetailsViewController.update(with: character)
     }
 }
 
