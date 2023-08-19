@@ -10,6 +10,12 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
 
+    // MARK: - Declarations
+
+    private enum Constant {
+        static let title = "Characters"
+    }
+
     // MARK: - Propreties
 
     private var charactersView: CharactersView {
@@ -29,6 +35,9 @@ final class CharactersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = Constant.title
+        navigationController?.navigationBar.prefersLargeTitles = true
 
         charactersView.collectionView.delegate = self
         dataSource = CharactersDataSource(collectionView: charactersView.collectionView,

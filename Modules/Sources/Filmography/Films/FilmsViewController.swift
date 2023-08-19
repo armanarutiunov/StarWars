@@ -10,6 +10,12 @@ import UIKit
 
 final class FilmsViewController: UIViewController {
 
+    // MARK: - Declarations
+
+    private enum Constant {
+        static let title = "Films"
+    }
+
     // MARK: - Propreties
 
     private var filmsView: FilmsView {
@@ -29,6 +35,9 @@ final class FilmsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = Constant.title
+        navigationController?.navigationBar.prefersLargeTitles = true
 
         filmsView.collectionView.delegate = self
         dataSource = FilmsDataSource(collectionView: filmsView.collectionView,
