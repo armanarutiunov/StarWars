@@ -6,7 +6,13 @@
 //
 
 import DesignSystem
+import FilmographyManager
 import UIKit
+
+protocol CharactersViewControllerDelegate: AnyObject {
+    func charactersViewControllerDidFetchCharacters()
+    func charactersViewControllerDidSelectCharacter(_ character: Character)
+}
 
 final class CharactersViewController: UIViewController {
 
@@ -26,6 +32,8 @@ final class CharactersViewController: UIViewController {
     }
 
     private var dataSource: CharactersDataSource!
+
+    weak var delegate: CharactersViewControllerDelegate?
 
     // MARK: - Life Cycle
 
@@ -55,6 +63,7 @@ final class CharactersViewController: UIViewController {
 
             do {
                 try await dataSource.fetchCharacters()
+                delegate?.charactersViewControllerDidFetchCharacters()
             } catch {
                 show(error as NSError)
             }
@@ -66,5 +75,10 @@ final class CharactersViewController: UIViewController {
 extension CharactersViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let character = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+
+        delegate?.charactersViewControllerDidSelectCharacter(character)
     }
 }

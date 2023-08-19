@@ -6,7 +6,13 @@
 //
 
 import DesignSystem
+import FilmographyManager
 import UIKit
+
+protocol FilmsViewControllerDelegate: AnyObject {
+    func filmsViewControllerDidFetchFilms()
+    func filmsViewControllerDidSelectFilm(_ film: Film)
+}
 
 final class FilmsViewController: UIViewController {
 
@@ -26,6 +32,8 @@ final class FilmsViewController: UIViewController {
     }
 
     private var dataSource: FilmsDataSource!
+
+    weak var delegate: FilmsViewControllerDelegate?
 
     // MARK: - Life Cycle
 
@@ -47,7 +55,6 @@ final class FilmsViewController: UIViewController {
 
     // MARK: - Actions
 
-    @MainActor
     private func fetchFilms() {
         Task { [weak self] in
             guard let self else {
@@ -56,6 +63,7 @@ final class FilmsViewController: UIViewController {
 
             do {
                 try await dataSource.fetchFilms()
+                delegate?.filmsViewControllerDidFetchFilms()
             } catch {
                 show(error as NSError)
             }
@@ -67,5 +75,10 @@ final class FilmsViewController: UIViewController {
 extension FilmsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let film = self.dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+
+        delegate?.filmsViewControllerDidSelectFilm(film)
     }
 }

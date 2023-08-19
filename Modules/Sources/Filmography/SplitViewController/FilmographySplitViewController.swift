@@ -5,6 +5,7 @@
 //  Created by Arman Arutiunov on 18/08/2023.
 //
 
+import FilmographyManager
 import UIKit
 
 public final class FilmographySplitViewController: UISplitViewController {
@@ -60,14 +61,18 @@ public final class FilmographySplitViewController: UISplitViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        delegate = self
+        preferredDisplayMode = .twoBesideSecondary
+
         viewControllers = [
             UINavigationController(rootViewController: filmsViewController),
             UINavigationController(rootViewController: charactersViewController),
             UINavigationController(rootViewController: characterDetailsViewController)
         ]
 
-        delegate = self
-        preferredDisplayMode = .twoBesideSecondary
+        dataSource.delegate = self
+        filmsViewController.delegate = self
+        charactersViewController.delegate = self
 
         update(with: .init(isDataReady: false))
         spinnerView.startAnimating()
@@ -86,5 +91,35 @@ extension FilmographySplitViewController: UISplitViewControllerDelegate {
 
     public func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
         .primary
+    }
+}
+
+// MARK: - FilmsViewControllerDelegate
+extension FilmographySplitViewController: FilmsViewControllerDelegate {
+
+    func filmsViewControllerDidFetchFilms() {
+        dataSource.onFilmsFetched()
+    }
+
+    func filmsViewControllerDidSelectFilm(_ film: Film) {
+    }
+}
+
+// MARK: - CharactersViewControllerDelegate
+extension FilmographySplitViewController: CharactersViewControllerDelegate {
+
+    func charactersViewControllerDidFetchCharacters() {
+        dataSource.onCharactersFetched()
+    }
+
+    func charactersViewControllerDidSelectCharacter(_ character: Character) {
+    }
+}
+
+// MARK: - FilmographyDataSourceDelegate
+extension FilmographySplitViewController: FilmographyDataSourceDelegate {
+
+    func filmographyDataSourceDataReady() {
+        update(with: .init(isDataReady: true))
     }
 }

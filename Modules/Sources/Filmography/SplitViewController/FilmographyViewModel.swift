@@ -18,7 +18,7 @@ struct FilmographyViewModel {
     }
 
     var isSpinnerHidden: Bool {
-        !isDataReady
+        isDataReady
     }
 
     // MARK: - Life Cycle

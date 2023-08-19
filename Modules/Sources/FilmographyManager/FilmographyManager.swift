@@ -40,27 +40,29 @@ public final class FilmographyManager: FilmographyManageable {
                                                  endpoint: SWAPIEndpoint.films,
                                                  httpHeaders: SWAPIHeader.allHeaders)
         let response: FilmsResponse = try await cloudManager.request(with: configuration)
+        print("✨ Fetched Films")
         return response.films
     }
 
     @MainActor
     public func fetchCharacters() async throws -> [Character] {
-        var index: Int?
+        var currentPage: Int? = 1
         var characters = [Character]()
 
-        while index != nil {
-            let page = try await fetchCharactersPage(at: index ?? 1)
-            index = page.nextPage
+        while currentPage != nil {
+            let page = try await fetchCharactersPage(at: currentPage ?? 0)
+            print("✨ Fetched Characters on page \(currentPage!)")
+            currentPage = page.nextPage
             characters.append(contentsOf: page.characters)
         }
 
         return characters
     }
 
-    private func fetchCharactersPage(at index: Int) async throws -> CharactersPage {
+    private func fetchCharactersPage(at page: Int) async throws -> CharactersPage {
         try await cloudManager.request(with: .init(httpMethod: .get,
                                                    endpoint: SWAPIEndpoint.people,
-                                                   parameters: [ParameterKey.page.rawValue: "\(index)"],
+                                                   parameters: [ParameterKey.page.rawValue: "\(page)"],
                                                    httpHeaders: SWAPIHeader.allHeaders))
     }
 }

@@ -70,4 +70,8 @@ final class CharactersDataSource {
         snapshot.appendItems(characters)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
+
+    func itemIdentifier(for indexPath: IndexPath) -> Character? {
+        dataSource.itemIdentifier(for: indexPath)
+    }
 }

@@ -53,4 +53,8 @@ final class FilmsDataSource {
         snapshot.appendItems(films)
         dataSource.apply(snapshot, animatingDifferences: !films.isEmpty)
     }
+
+    func itemIdentifier(for indexPath: IndexPath) -> Film? {
+        dataSource.itemIdentifier(for: indexPath)
+    }
 }
