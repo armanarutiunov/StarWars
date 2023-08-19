@@ -30,7 +30,12 @@ final class FilmsView: UIView {
 
     private let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .sidebarPlain))
 
-    private let activityIndicator = UIActivityIndicatorView()
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = true
+        return activityIndicator
+    }()
 
     // MARK: - Life Cycle
 
@@ -38,7 +43,6 @@ final class FilmsView: UIView {
         super.awakeFromNib()
 
         addSubviewsAndConstraints()
-        configureSubviews()
     }
 
     private func addSubviewsAndConstraints() {
@@ -50,10 +54,6 @@ final class FilmsView: UIView {
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-    }
-
-    private func configureSubviews() {
-        activityIndicator.isHidden = true
     }
 
     // MARK: - Actions
