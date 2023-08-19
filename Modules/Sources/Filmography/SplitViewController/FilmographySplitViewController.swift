@@ -9,14 +9,37 @@ import UIKit
 
 public final class FilmographySplitViewController: UISplitViewController {
 
+    // MARK: - Declarations
+
+    private enum Constant {
+        static let cornerRadius = 10.0
+        static let length = 200.0
+    }
+
     // MARK: - Properties
 
-    private var filmographyView: FilmographyView {
-        guard let view = view as? FilmographyView else {
-            fatalError("Failed to cast view to FilmographyView")
-        }
-        return view
-    }
+    private lazy var spinnerView: UIActivityIndicatorView = {
+        let spinnerView = UIActivityIndicatorView(style: .large)
+        spinnerView.hidesWhenStopped = true
+        spinnerView.backgroundColor = UIColor.darkGray
+        spinnerView.color = .white
+        spinnerView.layer.cornerRadius = Constant.cornerRadius
+
+        view.addSubview(spinnerView)
+
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            spinnerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinnerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            spinnerView.heightAnchor.constraint(equalToConstant: Constant.length),
+            spinnerView.widthAnchor.constraint(equalToConstant: Constant.length)
+        ])
+
+        return spinnerView
+    }()
+
+    private let dataSource = FilmographyDataSource()
 
     private let filmsViewController = FilmsViewController()
 
@@ -34,10 +57,6 @@ public final class FilmographySplitViewController: UISplitViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func loadView() {
-        view = FilmographyView()
-    }
-
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,8 +69,15 @@ public final class FilmographySplitViewController: UISplitViewController {
         delegate = self
         preferredDisplayMode = .twoBesideSecondary
 
-        filmographyView.update(with: .init(isDataReady: false))
-        filmographyView.spinnerView.startAnimating()
+        update(with: .init(isDataReady: false))
+        spinnerView.startAnimating()
+    }
+
+    // MARK: - Actions
+
+    func update(with viewModel: FilmographyViewModel) {
+        view.isUserInteractionEnabled = viewModel.isUserInteractionEnabled
+        spinnerView.isHidden = viewModel.isSpinnerHidden
     }
 }
 
