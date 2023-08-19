@@ -9,10 +9,18 @@ import UIKit
 
 public final class FilmographySplitViewController: UISplitViewController {
 
+    // MARK: - Properties
+
+    private let filmsViewController = FilmsViewController()
+
     // MARK: - Life Cycle
 
     public init() {
         super.init(style: .tripleColumn)
+
+        viewControllers = [
+            filmsViewController
+        ]
     }
 
     required init?(coder: NSCoder) {
