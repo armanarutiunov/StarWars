@@ -14,7 +14,9 @@ public final class FilmographySplitViewController: UISplitViewController {
 
     private enum Constant {
         static let cornerRadius = 10.0
-        static let length = 200.0
+        static var length: CGFloat {
+            UIDevice.current.userInterfaceIdiom == .phone ? 100 : 200
+        }
     }
 
     // MARK: - Properties
@@ -99,10 +101,19 @@ extension FilmographySplitViewController: FilmsViewControllerDelegate {
 
     func filmsViewControllerDidFetchFilms() {
         dataSource.onFilmsFetched()
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            update(with: .init(isDataReady: true))
+        }
     }
 
     func filmsViewControllerDidSelectFilm(_ film: Film) {
         charactersViewController.updateToCharacters(from: film)
+        show(.supplementary)
+
+        if UIDevice.current.userInterfaceIdiom == .phone && !dataSource.areCharactersFetched {
+            update(with: .init(isDataReady: false))
+        }
     }
 }
 
@@ -111,9 +122,14 @@ extension FilmographySplitViewController: CharactersViewControllerDelegate {
 
     func charactersViewControllerDidFetchCharacters() {
         dataSource.onCharactersFetched()
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            update(with: .init(isDataReady: true))
+        }
     }
 
     func charactersViewControllerDidSelectCharacter(_ character: Character) {
+        show(.secondary)
         characterDetailsViewController.update(with: character)
     }
 }
