@@ -37,6 +37,7 @@ final class FilmsDataSource {
 
     // MARK: - Actions
 
+    @MainActor
     func fetchFilms() async throws {
         do {
             let films = try await manager.fetchFilms()

@@ -41,6 +41,7 @@ final class CharactersDataSource {
 
     // MARK: - Actions
 
+    @MainActor
     func fetchCharacters() async throws {
         do {
             self.characters = try await manager.fetchCharacters()
