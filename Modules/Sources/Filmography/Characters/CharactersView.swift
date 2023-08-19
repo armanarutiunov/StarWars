@@ -29,36 +29,4 @@ final class CharactersView: UIView {
     }()
 
     private let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .sidebarPlain))
-
-    private let activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = true
-        return activityIndicator
-    }()
-
-    // MARK: - Life Cycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        addSubviewsAndConstraints()
-    }
-
-    private func addSubviewsAndConstraints() {
-        addSubview(activityIndicator)
-
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-    }
-
-    // MARK: - Actions
-
-    func update(with viewModel: CharactersViewModel) {
-        activityIndicator.isHidden = viewModel.isActivityIndicatorHidden
-    }
 }

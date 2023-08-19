@@ -58,8 +58,6 @@ final class CharactersViewController: UIViewController {
             } catch {
                 show(error as NSError)
             }
-
-            charactersView.update(with: .init(isActivityIndicatorHidden: false))
         }
     }
 }

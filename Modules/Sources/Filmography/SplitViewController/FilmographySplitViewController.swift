@@ -11,6 +11,13 @@ public final class FilmographySplitViewController: UISplitViewController {
 
     // MARK: - Properties
 
+    private var filmographyView: FilmographyView {
+        guard let view = view as? FilmographyView else {
+            fatalError("Failed to cast view to FilmographyView")
+        }
+        return view
+    }
+
     private let filmsViewController = FilmsViewController()
 
     private let charactersViewController = CharactersViewController()
@@ -27,6 +34,10 @@ public final class FilmographySplitViewController: UISplitViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public override func loadView() {
+        view = FilmographyView()
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +49,9 @@ public final class FilmographySplitViewController: UISplitViewController {
 
         delegate = self
         preferredDisplayMode = .twoBesideSecondary
+
+        filmographyView.update(with: .init(isDataReady: false))
+        filmographyView.spinnerView.startAnimating()
     }
 }
 

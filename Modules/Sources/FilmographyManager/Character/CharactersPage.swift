@@ -18,7 +18,7 @@ struct CharactersPage: Decodable {
 
     // MARK: - Properties
 
-    let nextPage: Int?
+    private(set) var nextPage: Int?
 
     let characters: [Character]
 
@@ -31,9 +31,12 @@ struct CharactersPage: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let nextPageURLString = try? container.decode(String.self, forKey: .nextPageURL)
-        let lastCharacter = nextPageURLString?.last ?? String.Element("")
-        self.nextPage = Int("\(lastCharacter)")
+
+        if let nextPageURLString = try? container.decode(String.self, forKey: .nextPageURL) {
+            let lastCharacter = nextPageURLString.last ?? String.Element("")
+            self.nextPage = Int("\(lastCharacter)")
+        }
+
         self.characters = try container.decode([Character].self, forKey: .characters)
     }
 }

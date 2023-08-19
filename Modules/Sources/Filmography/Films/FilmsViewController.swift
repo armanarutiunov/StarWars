@@ -47,6 +47,7 @@ final class FilmsViewController: UIViewController {
 
     // MARK: - Actions
 
+    @MainActor
     private func fetchFilms() {
         Task { [weak self] in
             guard let self else {
@@ -58,8 +59,6 @@ final class FilmsViewController: UIViewController {
             } catch {
                 show(error as NSError)
             }
-
-            filmsView.update(with: .init(isActivityIndicatorHidden: false))
         }
     }
 }
