@@ -15,14 +15,17 @@ public final class FilmographySplitViewController: UISplitViewController {
 
     private let charactersViewController = CharactersViewController()
 
+    private let characterDetailsViewController = CharacterDetailsViewController()
+
     // MARK: - Life Cycle
 
     public init() {
         super.init(style: .tripleColumn)
 
         viewControllers = [
-            filmsViewController,
-            charactersViewController
+            UINavigationController(rootViewController: filmsViewController),
+            UINavigationController(rootViewController: charactersViewController),
+            UINavigationController(rootViewController: characterDetailsViewController)
         ]
     }
 
