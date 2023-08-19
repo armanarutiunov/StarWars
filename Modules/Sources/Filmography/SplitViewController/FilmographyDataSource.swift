@@ -19,7 +19,7 @@ final class FilmographyDataSource {
 
     var areCharactersFetched = false
 
-    private var isAllDataReady: Bool {
+    private var isAllDataFetched: Bool {
         areFilmedFetched && areCharactersFetched
     }
 
@@ -27,16 +27,16 @@ final class FilmographyDataSource {
 
     func onFilmsFetched() {
         areFilmedFetched = true
-        notifyIfDataIsReady()
+        notifyIfAllDataIsFetched()
     }
 
     func onCharactersFetched() {
         areCharactersFetched = true
-        notifyIfDataIsReady()
+        notifyIfAllDataIsFetched()
     }
 
-    private func notifyIfDataIsReady() {
-        if isAllDataReady {
+    private func notifyIfAllDataIsFetched() {
+        if isAllDataFetched {
             delegate?.filmographyDataSourceDataReady()
         }
     }
