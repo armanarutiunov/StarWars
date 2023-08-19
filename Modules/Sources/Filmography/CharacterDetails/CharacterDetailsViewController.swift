@@ -19,7 +19,10 @@ final class CharacterDetailsViewController: UIViewController {
         return view
     }
 
-    private var dataSource: CharacterDetailsDataSource!
+    private lazy var dataSource: CharacterDetailsDataSource = {
+        CharacterDetailsDataSource(collectionView: characterDetailsView.collectionView,
+                                   cellRegistration: characterDetailsView.cellRegistration)
+    }()
 
     // MARK: - Life Cycle
 
@@ -31,9 +34,6 @@ final class CharacterDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         navigationController?.navigationBar.prefersLargeTitles = true
-
-        dataSource = CharacterDetailsDataSource(collectionView: characterDetailsView.collectionView,
-                                                cellRegistration: characterDetailsView.cellRegistration)
     }
 
     // MARK: - Actions

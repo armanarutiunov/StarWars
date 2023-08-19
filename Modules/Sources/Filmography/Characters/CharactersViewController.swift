@@ -31,7 +31,10 @@ final class CharactersViewController: UIViewController {
         return view
     }
 
-    private var dataSource: CharactersDataSource!
+    private lazy var dataSource: CharactersDataSource = {
+        CharactersDataSource(collectionView: charactersView.collectionView,
+                             cellRegistration: charactersView.cellRegistration)
+    }()
 
     weak var delegate: CharactersViewControllerDelegate?
 
@@ -48,8 +51,6 @@ final class CharactersViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         charactersView.collectionView.delegate = self
-        dataSource = CharactersDataSource(collectionView: charactersView.collectionView,
-                                          cellRegistration: charactersView.cellRegistration)
         fetchCharacters()
     }
 
