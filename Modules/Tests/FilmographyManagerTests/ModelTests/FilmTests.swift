@@ -11,6 +11,8 @@ import XCTest
 
 final class FilmTests: XCTestCase {
 
+    // MARK: - Decoding
+
     func testDecode() {
         let film: Film? = decodeFromJSON(json: FilmJSON)
 
@@ -33,5 +35,21 @@ final class FilmTests: XCTestCase {
                                             "24",
                                             "25",
                                             "26"])
+    }
+
+    // MARK: - Encoding
+
+    func testEncode() {
+        let film = Film.mock()
+        let filmJSON = encodeToJSON(object: film)
+
+        XCTAssertNotNil(filmJSON)
+        XCTAssertEqual(filmJSON?[Film.CodingKeys.title.rawValue] as? String, film.title)
+        XCTAssertEqual(filmJSON?[Film.CodingKeys.url.rawValue] as? String, "https://swapi.dev/api/films/\(film.id)/")
+
+        let characterURLs = film.characterIDs.map {
+            "https://swapi.dev/api/people/\($0)/"
+        }
+        XCTAssertEqual(filmJSON?[Film.CodingKeys.characterURLs.rawValue] as? [String], characterURLs)
     }
 }
