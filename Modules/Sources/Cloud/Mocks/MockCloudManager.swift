@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MockCloudManager: CloudManageable {
+public final class MockCloudManager: CloudManageable {
 
     // MARK: - Properties
 
@@ -17,14 +17,14 @@ final class MockCloudManager: CloudManageable {
 
     // MARK: - Life Cycle
 
-    init(expectedResult: Result<Decodable, Error>, requestDuration: TimeInterval = 0.2) {
+    public init(expectedResult: Result<Decodable, Error>, requestDuration: TimeInterval = 0.2) {
         self.expectedResult = expectedResult
         self.requestDuration = requestDuration
     }
 
     // MARK: - Actions
 
-    func request<T: Decodable>(with configuration: RequestConfiguration) async throws -> T {
+    public func request<T: Decodable>(with configuration: RequestConfiguration) async throws -> T {
         try await Task.sleep(for: .seconds(requestDuration))
 
         switch expectedResult {
