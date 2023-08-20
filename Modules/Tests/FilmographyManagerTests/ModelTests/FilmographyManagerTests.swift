@@ -6,10 +6,20 @@
 //
 
 import Cloud
+import Datastore
 @testable import FilmographyManager
 import XCTest
 
 final class FilmographyManagerTests: XCTestCase {
+
+    // MARK: - Life Cycle
+
+    override func tearDown() {
+        Datastore.deleteAll(of: [Film].self)
+        Datastore.deleteAll(of: [Character].self)
+
+        super.tearDown()
+    }
 
     // MARK: - Film Fetching
 
@@ -18,9 +28,12 @@ final class FilmographyManagerTests: XCTestCase {
         let cloudManager = MockCloudManager(expectedResult: .success(expectedResponse))
         let manager = FilmographyManager(cloudManager: cloudManager)
 
+        XCTAssertNil(manager.cachedFilms)
+
         let response = try await manager.fetchFilms()
 
         XCTAssertEqual(response, expectedResponse.films)
+        XCTAssertEqual(manager.cachedFilms, expectedResponse.films)
     }
 
     func testFetchRoomsFailure() async {
@@ -45,6 +58,8 @@ final class FilmographyManagerTests: XCTestCase {
         let cloudManager = MockCloudManager(expectedResult: .success(singlePageResponse))
         let manager = FilmographyManager(cloudManager: cloudManager)
 
+        XCTAssertNil(manager.cachedCharacters)
+
         let response = try await manager.fetchCharacters()
 
         // Because fetchCharacters() fetches characters from 9 pages, we need to mock that in the test
@@ -55,6 +70,7 @@ final class FilmographyManagerTests: XCTestCase {
         ninePageCharacters.sort()
 
         XCTAssertEqual(response, ninePageCharacters)
+        XCTAssertEqual(manager.cachedCharacters, ninePageCharacters)
     }
 
     func testCharactersFailure() async {
