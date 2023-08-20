@@ -39,6 +39,11 @@ final class FilmsDataSource {
 
     @MainActor
     func fetchFilms() async throws {
+        if let cachedFilms = manager.cachedFilms {
+            configureDataSnapshot(with: cachedFilms)
+            return
+        }
+
         do {
             let films = try await manager.fetchFilms()
             configureDataSnapshot(with: films)
