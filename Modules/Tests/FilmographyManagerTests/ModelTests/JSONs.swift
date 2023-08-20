@@ -46,3 +46,8 @@ let FilmJSON: [String: Any] = [
 let FilmsResponseJSON: [String: Any] = [
     FilmsResponse.CodingKeys.films.rawValue: [FilmJSON]
 ]
+
+let CharactersPageJSON: [String: Any] = [
+    CharactersPage.CodingKeys.nextPageURL.rawValue: "https://swapi.dev/api/people/?page=2",
+    CharactersPage.CodingKeys.characters.rawValue: [CharacterJSON]
+]
