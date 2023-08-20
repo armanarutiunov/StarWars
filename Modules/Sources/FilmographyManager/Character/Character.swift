@@ -93,3 +93,27 @@ extension Character: Comparable {
         lhs.name < rhs.name
     }
 }
+
+// MARK: - Mock
+extension Character {
+
+    static func mock(id: String = "1",
+                     name: String = "Luke Skywalker",
+                     height: String = "172",
+                     mass: String = "77",
+                     hairColor: String = "blond",
+                     skinColor: String = "fair",
+                     eyeColor: String = "blue",
+                     birthYear: String = "19BBY",
+                     gender: String = "male") -> Character {
+        Character(id: id,
+                  name: name, 
+                  height: height,
+                  mass: mass,
+                  hairColor: hairColor,
+                  skinColor: skinColor,
+                  eyeColor: eyeColor,
+                  birthYear: birthYear,
+                  gender: gender)
+    }
+}
