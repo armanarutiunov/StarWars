@@ -27,4 +27,22 @@ final class CharacterTests: XCTestCase {
         XCTAssertEqual(character?.birthYear, "19BBY")
         XCTAssertEqual(character?.gender, "male")
     }
+
+    // MARK: - Encoding
+
+    func testEncode() {
+        let character = Character.mock()
+        let characterJSON = encodeToJSON(object: character)
+
+        XCTAssertNotNil(characterJSON)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.name.rawValue] as? String, character.name)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.height.rawValue] as? String, character.height)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.mass.rawValue] as? String, character.mass)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.hairColor.rawValue] as? String, character.hairColor)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.skinColor.rawValue] as? String, character.skinColor)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.eyeColor.rawValue] as? String, character.eyeColor)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.birthYear.rawValue] as? String, character.birthYear)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.gender.rawValue] as? String, character.gender)
+        XCTAssertEqual(characterJSON?[Character.CodingKeys.url.rawValue] as? String, "https://swapi.dev/api/people/\(character.id)/")
+    }
 }
