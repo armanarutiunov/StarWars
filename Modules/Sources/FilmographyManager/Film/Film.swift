@@ -44,6 +44,24 @@ public struct Film: Identifiable, Decodable {
     }
 }
 
+// MARK: - Encodable
+extension Film: Encodable {
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(title, forKey: .title)
+
+        let url = URL(string: "https://swapi.dev/api/films/\(id)/")
+        try container.encode(url, forKey: .url)
+
+        let characterURLs = characterIDs.map {
+            URL(string: "https://swapi.dev/api/people/\($0)/")
+        }
+        try container.encode(characterURLs, forKey: .characterURLs)
+    }
+}
+
 // MARK: - Hashable
 extension Film: Hashable {
 
