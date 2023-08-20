@@ -1,5 +1,5 @@
 //
-//  JSONDecoding.swift
+//  JSONCoding.swift
 //  
 //
 //  Created by Arman Arutiunov on 20/08/2023.
@@ -17,4 +17,10 @@ public func decodeFromJSON<T: Decodable>(json: [String: Any?]) -> T? {
         print("Unable to parse: \(error)")
         return nil
     }
+}
+
+public func encodeToJSON(object: some Encodable) -> [String: Any]? {
+    let encoder = JSONEncoder()
+    let data = try! encoder.encode(object)
+    return try? JSONSerialization.jsonObject(with: data) as? [String: Any]
 }
