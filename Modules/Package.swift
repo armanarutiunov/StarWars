@@ -34,6 +34,9 @@ let package = Package(name: "Modules",
                                 .target(name: "Utilities",
                                         dependencies: []),
 
+                                .testTarget(name: "DatastoreTests",
+                                            dependencies: [Datastore]),
+
                                 .testTarget(name: "FilmographyManagerTests",
                                             dependencies: [Cloud, FilmographyManager, Utilities])]
 )

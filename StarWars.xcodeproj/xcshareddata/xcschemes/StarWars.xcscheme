@@ -39,6 +39,16 @@
                ReferencedContainer = "container:Modules">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DatastoreTests"
+               BuildableName = "DatastoreTests"
+               BlueprintName = "DatastoreTests"
+               ReferencedContainer = "container:Modules">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
