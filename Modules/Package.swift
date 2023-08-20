@@ -28,5 +28,8 @@ let package = Package(name: "Modules",
                                         dependencies: [Cloud, Utilities]),
 
                                 .target(name: "Utilities",
-                                        dependencies: [])]
+                                        dependencies: []),
+
+                                .testTarget(name: "FilmographyManagerTests",
+                                            dependencies: [Cloud, FilmographyManager, Utilities])]
 )
