@@ -4,6 +4,7 @@
 import PackageDescription
 
 private let Cloud = Target.Dependency(stringLiteral: "Cloud")
+private let Datastore = Target.Dependency(stringLiteral: "Datastore")
 private let DesignSystem = Target.Dependency(stringLiteral: "DesignSystem")
 private let FilmographyManager = Target.Dependency(stringLiteral: "FilmographyManager")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
@@ -18,6 +19,9 @@ let package = Package(name: "Modules",
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
 
+                                .target(name: "Datastore",
+                                        dependencies: []),
+
                                 .target(name: "DesignSystem",
                                         dependencies: []),
 
@@ -25,7 +29,7 @@ let package = Package(name: "Modules",
                                         dependencies: [DesignSystem, FilmographyManager]),
 
                                 .target(name: "FilmographyManager",
-                                        dependencies: [Cloud, Utilities]),
+                                        dependencies: [Cloud, Datastore, Utilities]),
 
                                 .target(name: "Utilities",
                                         dependencies: []),
