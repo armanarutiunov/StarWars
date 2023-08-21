@@ -71,6 +71,25 @@ public struct Character: Identifiable, Decodable {
     }
 }
 
+// MARK: - Encodable
+extension Character: Encodable {
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        let url = URL(string: "https://swapi.dev/api/people/\(id)/")
+        try container.encode(url, forKey: .url)
+        try container.encode(name, forKey: .name)
+        try container.encode(height, forKey: .height)
+        try container.encode(mass, forKey: .mass)
+        try container.encode(hairColor, forKey: .hairColor)
+        try container.encode(skinColor, forKey: .skinColor)
+        try container.encode(eyeColor, forKey: .eyeColor)
+        try container.encode(birthYear, forKey: .birthYear)
+        try container.encode(gender, forKey: .gender)
+    }
+}
+
 // MARK: - Hashable
 extension Character: Hashable {
 
@@ -91,5 +110,29 @@ extension Character: Comparable {
 
     public static func < (lhs: Character, rhs: Character) -> Bool {
         lhs.name < rhs.name
+    }
+}
+
+// MARK: - Mock
+extension Character {
+
+    static func mock(id: String = "1",
+                     name: String = "Luke Skywalker",
+                     height: String = "172",
+                     mass: String = "77",
+                     hairColor: String = "blond",
+                     skinColor: String = "fair",
+                     eyeColor: String = "blue",
+                     birthYear: String = "19BBY",
+                     gender: String = "male") -> Character {
+        Character(id: id,
+                  name: name, 
+                  height: height,
+                  mass: mass,
+                  hairColor: hairColor,
+                  skinColor: skinColor,
+                  eyeColor: eyeColor,
+                  birthYear: birthYear,
+                  gender: gender)
     }
 }

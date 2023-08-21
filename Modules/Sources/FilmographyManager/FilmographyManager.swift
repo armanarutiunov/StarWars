@@ -6,10 +6,14 @@
 //
 
 import Cloud
+import Datastore
 import Foundation
 import Utilities
 
 public protocol FilmographyManageable {
+    var cachedFilms: [Film]? { get }
+    var cachedCharacters: [Character]? { get }
+
     func fetchFilms() async throws -> [Film]
     func fetchCharacters() async throws -> [Character]
 }
@@ -22,11 +26,24 @@ public final class FilmographyManager: FilmographyManageable {
         case page
     }
 
+    private enum DatastoreKey {
+        static let films = "FilmographyManager.films"
+        static let characters = "FilmographyManager.characters"
+    }
+
     // MARK: - Properties
 
     public static let shared = FilmographyManager()
 
     private let cloudManager: CloudManageable
+
+    public var cachedFilms: [Film]? {
+        Datastore.load(key: DatastoreKey.films)
+    }
+
+    public var cachedCharacters: [Character]? {
+        Datastore.load(key: DatastoreKey.characters)
+    }
 
     // MARK: - Life Cycle
 
@@ -42,6 +59,7 @@ public final class FilmographyManager: FilmographyManageable {
                                                  endpoint: SWAPIEndpoint.films,
                                                  httpHeaders: SWAPIHeader.allHeaders)
         let response: FilmsResponse = try await cloudManager.request(with: configuration)
+        Datastore.save(response.films, key: DatastoreKey.films)
         return response.films
     }
 
@@ -64,7 +82,10 @@ public final class FilmographyManager: FilmographyManageable {
                 characters.append(contentsOf: page.characters)
             }
 
-            return characters.sorted()
+            let sortedCharacters = characters.sorted()
+            Datastore.save(sortedCharacters, key: DatastoreKey.characters)
+
+            return sortedCharacters
         }
     }
 

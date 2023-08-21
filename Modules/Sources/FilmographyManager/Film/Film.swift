@@ -44,6 +44,24 @@ public struct Film: Identifiable, Decodable {
     }
 }
 
+// MARK: - Encodable
+extension Film: Encodable {
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(title, forKey: .title)
+
+        let url = URL(string: "https://swapi.dev/api/films/\(id)/")
+        try container.encode(url, forKey: .url)
+
+        let characterURLs = characterIDs.map {
+            URL(string: "https://swapi.dev/api/people/\($0)/")
+        }
+        try container.encode(characterURLs, forKey: .characterURLs)
+    }
+}
+
 // MARK: - Hashable
 extension Film: Hashable {
 
@@ -51,5 +69,32 @@ extension Film: Hashable {
         hasher.combine(id)
         hasher.combine(title)
         hasher.combine(characterIDs)
+    }
+}
+
+// MARK: - Mock
+extension Film {
+
+    static func mock(id: String = "2",
+                     title: String = "The Empire Strikes Back",
+                     characterIDs: [String] = ["1",
+                                               "2",
+                                               "3",
+                                               "4",
+                                               "5",
+                                               "10",
+                                               "13",
+                                               "14",
+                                               "18",
+                                               "20",
+                                               "21",
+                                               "22",
+                                               "23",
+                                               "24",
+                                               "25",
+                                               "26"]) -> Film {
+        Film(id: id,
+             title: title,
+             characterIDs: characterIDs)
     }
 }

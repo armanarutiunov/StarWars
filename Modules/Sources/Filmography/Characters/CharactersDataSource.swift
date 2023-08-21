@@ -43,6 +43,12 @@ final class CharactersDataSource {
 
     @MainActor
     func fetchCharacters() async throws {
+        if let cachedCharacters = manager.cachedCharacters {
+            self.characters = cachedCharacters
+            configureDataSnapshot(with: characters)
+            return
+        }
+
         do {
             self.characters = try await manager.fetchCharacters()
             configureDataSnapshot(with: characters)
